@@ -1,0 +1,5 @@
+﻿.special {
+    @apply h-20 px-3.5 py-[6.50px] bg-[#575bc7] rounded shadow border border-[#575bc7] justify-center items-center gap-1 inline-flex;
+    @apply hover:bg-red-600 hover:border-[#575bc7];
+    /*height: 300px;*/
+}

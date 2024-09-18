@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.6"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.6" PrivateAssets="all"/>
+    </ItemGroup>
+
+    <!--    <Target Name="PostBuild" BeforeTargets="PostBuildEvent">-->
+    <!--        <Exec Command="npx postcss $(ProjectDir)obj\$(ConfigurationName)\$(TargetFramework)\scopedcss\bundle\$(ProjectName).styles.css" />-->
+    <!--    </Target>-->
+
+    <Target Name="Tailwind" BeforeTargets="Build">
+        <Exec Command="npm run css:build"/>
+    </Target>
+    
+<!--    <Target Name="CopyCssBundles" AfterTargets="AfterBuild">-->
+<!--        <ItemGroup>-->
+<!--            &lt;!&ndash; Include path to whatever file(s) you want to copy from RCL, separated by a semi-colon&ndash;&gt;-->
+<!--            &lt;!&ndash; Also works with relative paths&ndash;&gt;-->
+<!--            &lt;!&ndash; Also allows glob patterns (e.g., ...\scopedcss\**\*.* to include all files in the scopedcss directory)&ndash;&gt;-->
+<!--            <MyCssBundles Include="$(ProjectDir)obj\$(Configuration)\$(TargetFramework)\scopedcss\bundle\$(ProjectName).styles.css"/>-->
+<!--        </ItemGroup>-->
+<!--        &lt;!&ndash; Source files are whatever you named the above tag ("MyCssBundles" in this example)&ndash;&gt;-->
+<!--        <Copy SourceFiles="@(MyCssBundles)" DestinationFiles="wwwroot\css\%(RecursiveDir)%(Filename)-copy%(Extension)" OverwriteReadOnlyFiles="true"/>-->
+<!--        -->
+<!--    </Target>-->
+
+    <Target Name="Postcss" AfterTargets="Build">
+        <Exec Command="npx postcss $(ProjectDir)obj\$(Configuration)\$(TargetFramework)\scopedcss\bundle\$(ProjectName).styles.css -o wwwroot\css\scoped.css" />
+    </Target>
+
+</Project>
